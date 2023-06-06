@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "767461995337",
+    "project_id": "testshareclub",
+    "storage_bucket": "testshareclub.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:767461995337:android:ba7691dc160f5163eae098",
+        "android_client_info": {
+          "package_name": "com.testshareclub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "767461995337-m3eh148r7c4o9f7e6iulhhou4j8ca2o4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.testshareclub",
+            "certificate_hash": "6ee88446e967ca8ab643ee29c83ec88c43304bc5"
+          }
+        },
+        {
+          "client_id": "767461995337-diliqc40kcs1enk8sn8a27g173pbuuft.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWeyF4oWJvNQVfNaau_CBaseEYN-GumU4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "767461995337-diliqc40kcs1enk8sn8a27g173pbuuft.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
