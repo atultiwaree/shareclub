@@ -4,8 +4,8 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import IonIcons from 'react-native-vector-icons/Ionicons';
 import StackNavigator from '../StackNavigator.js';
 import PlusScreenNavigator from '../StackNavigator.js/PlusScreenNavigator.js';
+import RequestScreenNavigator from '../StackNavigator.js/RequestScreenNavigator.js';
 import Profile from '../../screens/Profile.js';
-import Request from '../../screens/Request.js';
 
 const Tab = createBottomTabNavigator();
 
@@ -83,7 +83,7 @@ const TabNavigator = () => {
       />
       <Tab.Screen name="Search" component={Search} />
       <Tab.Screen name="Plus" component={PlusScreenNavigator} />
-      <Tab.Screen name="Request" component={Request} />
+      <Tab.Screen name="Request" component={RequestScreenNavigator} />
       <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
   );

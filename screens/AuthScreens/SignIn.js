@@ -6,15 +6,23 @@ const SignIn = () => {
   const signInAndSaveToLocal = async () => {
     try {
       let ServerResponse = await authSystem.googleSignIn();
-
       await AsyncStorage.setItem(
         'ServerResponse',
         JSON.stringify(ServerResponse),
       );
-
-      let result = await AsyncStorage.getItem('ServerResponse');
     } catch (error) {
       console.log(error.message);
+    }
+  };
+
+  const signOut = async () => {
+    console.log('SignOut Called');
+    try {
+      await authSystem.signOut();
+      let x = await AsyncStorage.removeItem('ServerResponse');
+      console.log(x);
+    } catch (e) {
+      console.log('🚀 ~ file: SignIn.js:25 ~ signOut ~ SignOut:', e.message);
     }
   };
 
@@ -23,7 +31,7 @@ const SignIn = () => {
       <TouchableOpacity onPress={signInAndSaveToLocal}>
         <Text>Sign In</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={authSystem.signOut}>
+      <TouchableOpacity onPress={signOut}>
         <Text>Sign Out</Text>
       </TouchableOpacity>
     </View>
@@ -37,4 +45,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
+
 export default SignIn;

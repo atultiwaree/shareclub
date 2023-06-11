@@ -1,6 +1,8 @@
-import {StyleSheet, Text, View, Image} from 'react-native';
+import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import auth from '@react-native-firebase/auth';
+import authSystem from '../OAuth';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Profile = () => {
   const [userName, setuserName] = useState('Default Name');
@@ -21,11 +23,26 @@ const Profile = () => {
     return unsub;
   });
 
+  const signOut = async () => {
+    console.log('SignOut Called');
+
+    try {
+      await authSystem.signOut();
+      let x = await AsyncStorage.removeItem('ServerResponse');
+      console.log(x);
+    } catch (e) {
+      console.log('🚀 ~ file: SignIn.js:25 ~ signOut ~ SignOut:', e.message);
+    }
+  };
+
   return (
     <View style={styles.warpper}>
       <Text>Name : {userName}</Text>
       <Text>Email : {userEmail}</Text>
       <Image source={{uri: userImage, height: 100, width: 100}} />
+      <TouchableOpacity onPress={signOut}>
+        <Text>SignOut</Text>
+      </TouchableOpacity>
     </View>
   );
 };
