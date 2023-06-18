@@ -1,10 +1,15 @@
-import {View, Text} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
+import {updateUser} from '../redux/Slices/authSlice';
+import {useDispatch} from 'react-redux';
 
 const Sell = () => {
+  const dispatcher = useDispatch();
+
   return (
-    <View>
+    <TouchableOpacity
+      onPress={() => dispatcher(updateUser({type: 'pending', data: false}))}>
       <Text>Sell</Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 

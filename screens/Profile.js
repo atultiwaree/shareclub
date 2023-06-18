@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react';
 import auth from '@react-native-firebase/auth';
 import authSystem from '../OAuth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {AuthContext} from '../Contexts';
 
 const Profile = () => {
   const [userName, setuserName] = useState('Default Name');
@@ -28,8 +29,10 @@ const Profile = () => {
 
     try {
       await authSystem.signOut();
-      let x = await AsyncStorage.removeItem('ServerResponse');
-      console.log(x);
+      await AsyncStorage.removeItem('id');
+      await AsyncStorage.removeItem('token');
+      await AsyncStorage.removeItem('verification');
+      await AsyncStorage.removeItem('active');
     } catch (e) {
       console.log('🚀 ~ file: SignIn.js:25 ~ signOut ~ SignOut:', e.message);
     }

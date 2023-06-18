@@ -15,9 +15,11 @@ const RequestScreenNavigator = () => {
 
   React.useEffect(() => {
     async function getAsyncValue() {
-      let gotValue = await AsyncStorage.getItem('ServerResponse');
-      setIsSignedIn(JSON.parse(gotValue));
-      setIsLoading(false);
+      let gotValue = await AsyncStorage.getItem('id');
+      if (gotValue) {
+        setIsSignedIn(JSON.parse(gotValue));
+        setIsLoading(false);
+      }
     }
     getAsyncValue().catch(e =>
       console.log('Under UseEffect In PlusScreenNavigator', e.message),
@@ -39,7 +41,7 @@ const RequestScreenNavigator = () => {
 
   return (
     <Stack.Navigator>
-      {!isSignedIn && !authState ? ( //is !isSignedIn
+      {!isSignedIn ? ( //is !isSignedIn
         <Stack.Group screenOptions={{presentation: 'fullScreenModal'}}>
           <Stack.Screen
             name="SignIn"

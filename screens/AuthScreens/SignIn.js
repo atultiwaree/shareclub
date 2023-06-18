@@ -1,15 +1,26 @@
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import authSystem from '../../OAuth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import {useDispatch, useSelector} from 'react-redux';
+import {addUser, resetUser} from '../../redux/Slices/authSlice';
 const SignIn = () => {
+  // console.log(
+  //   'Authenticte',
+  //   useSelector(state => state.auth),
+  // );
+
+  const dispatch = useDispatch();
+
   const signInAndSaveToLocal = async () => {
     try {
       let ServerResponse = await authSystem.googleSignIn();
-      await AsyncStorage.setItem(
-        'ServerResponse',
-        JSON.stringify(ServerResponse),
-      );
+
+      if (ServerResponse.success === true) {
+        console.log(
+          '🚀 ~ file: SignIn.js:19 ~ signInAndSaveToLocal ~ ServerResponse:Got Server Response',
+        );
+        dispatch(addUser(ServerResponse.data));
+      }
     } catch (error) {
       console.log(error.message);
     }
@@ -19,8 +30,7 @@ const SignIn = () => {
     console.log('SignOut Called');
     try {
       await authSystem.signOut();
-      let x = await AsyncStorage.removeItem('ServerResponse');
-      console.log(x);
+      dispatch(resetUser());
     } catch (e) {
       console.log('🚀 ~ file: SignIn.js:25 ~ signOut ~ SignOut:', e.message);
     }

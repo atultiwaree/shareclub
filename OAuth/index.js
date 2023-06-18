@@ -3,6 +3,7 @@ import axios from 'axios';
 import auth from '@react-native-firebase/auth';
 
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import DeviceInfo from 'react-native-device-info';
 
 GoogleSignin.configure({
   webClientId:
@@ -36,7 +37,10 @@ const googleSignIn = async () => {
 
     let {data: serverResponse} = await axios.post(
       `http://192.168.42.75:3000/api/v1/user/googleauth/${mainINfo.user.uid}`,
-      {}, //Must be sent otherwise will send error
+      {
+        deviceModel: DeviceInfo.getModel(),
+        deviceId: DeviceInfo.getDeviceId(),
+      }, //Must be sent otherwise will send error
       {
         headers: {
           authtoken: firebaseAuthToken,
