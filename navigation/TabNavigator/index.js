@@ -5,7 +5,7 @@ import IonIcons from 'react-native-vector-icons/Ionicons';
 import StackNavigator from '../StackNavigator.js';
 import PlusScreenNavigator from '../StackNavigator.js/PlusScreenNavigator.js';
 import RequestScreenNavigator from '../StackNavigator.js/RequestScreenNavigator.js';
-import Profile from '../../screens/Profile.js';
+import ProfileNavigator from '../StackNavigator.js/ProfileNavigator.js';
 
 const Tab = createBottomTabNavigator();
 
@@ -27,7 +27,7 @@ function screenOptions(route, color, focused) {
     case 'Plus':
       iconName = !focused ? 'add-circle-outline' : 'add-circle-sharp';
       break;
-    case 'Profile':
+    case 'Account':
       iconName = !focused ? 'person-outline' : 'person-sharp';
       break;
     case 'Request':
@@ -84,7 +84,7 @@ const TabNavigator = () => {
       <Tab.Screen name="Search" component={Search} />
       <Tab.Screen name="Plus" component={PlusScreenNavigator} />
       <Tab.Screen name="Request" component={RequestScreenNavigator} />
-      <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen name="Account" component={ProfileNavigator} />
     </Tab.Navigator>
   );
 };

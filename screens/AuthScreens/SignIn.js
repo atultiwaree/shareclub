@@ -1,49 +1,89 @@
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Pressable,
+  ActivityIndicator,
+  Image,
+} from 'react-native';
 import authSystem from '../../OAuth';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useDispatch, useSelector} from 'react-redux';
-import {addUser, resetUser} from '../../redux/Slices/authSlice';
+import {useDispatch} from 'react-redux';
+import {addUser} from '../../redux/Slices/authSlice';
+import DIcon from '../../Data/DIcons';
+import React from 'react';
+import messageData from '../../Data/message.data';
+
+//!On Cancel login loader unvisible has to be made
+
 const SignIn = () => {
-  // console.log(
-  //   'Authenticte',
-  //   useSelector(state => state.auth),
-  // );
+  const [loading, setLoading] = React.useState(false);
 
   const dispatch = useDispatch();
 
   const signInAndSaveToLocal = async () => {
     try {
+      //Start loader
+      setLoading(true);
+
       let ServerResponse = await authSystem.googleSignIn();
 
       if (ServerResponse.success === true) {
-        console.log(
-          '🚀 ~ file: SignIn.js:19 ~ signInAndSaveToLocal ~ ServerResponse:Got Server Response',
-        );
+        console.log('🚀 ~ User logged in.');
         dispatch(addUser(ServerResponse.data));
+        setLoading(false);
       }
     } catch (error) {
       console.log(error.message);
     }
   };
 
-  const signOut = async () => {
-    console.log('SignOut Called');
-    try {
-      await authSystem.signOut();
-      dispatch(resetUser());
-    } catch (e) {
-      console.log('🚀 ~ file: SignIn.js:25 ~ signOut ~ SignOut:', e.message);
-    }
-  };
-
   return (
     <View style={styles.wrapper}>
-      <TouchableOpacity onPress={signInAndSaveToLocal}>
-        <Text>Sign In</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={signOut}>
-        <Text>Sign Out</Text>
-      </TouchableOpacity>
+      <View style={styles.contentWrapper}>
+        <View style={styles.imageContainer}>
+          <Image
+            style={styles.image}
+            source={require('../../assets/images/new.png')}
+          />
+        </View>
+        <Pressable
+          android_ripple={{color: 'white'}}
+          style={[
+            !loading
+              ? styles.eachCategoryListWrapper
+              : {...styles.eachCategoryListWrapper, justifyContent: 'center'},
+          ]}
+          onPress={signInAndSaveToLocal}>
+          {!loading ? (
+            <>
+              <View style={styles.categoryIconTitle}>
+                <DIcon
+                  provider="Ionicon"
+                  name="ios-logo-google"
+                  color="#ff6584"
+                  size={25}
+                />
+                <Text style={styles.itemTitle}>Sign in with google</Text>
+              </View>
+              <View style={styles.numberOfItemsWrapper}>
+                <Text style={styles.numberOfItemsText}>
+                  <DIcon
+                    provider="Entypo"
+                    name="chevron-thin-right"
+                    color="#fff"
+                    size={20}
+                  />
+                </Text>
+              </View>
+            </>
+          ) : (
+            <ActivityIndicator size="small" color="#ff6584" />
+          )}
+        </Pressable>
+        <Text style={[styles.informationText, {fontSize: 10, fontWeight: 900}]}>
+          {messageData.Accept}
+        </Text>
+      </View>
     </View>
   );
 };
@@ -51,8 +91,54 @@ const SignIn = () => {
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
+    paddingHorizontal: 22,
+    paddingVertical: 10,
+  },
+  imageContainer: {
+    height: '80%',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  image: {
+    resizeMode: 'contain',
+    width: 250,
+  },
+  //!Got Styles From home, Need to fix
+  eachCategoryListWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: '#333',
+    padding: 15,
+    borderRadius: 30,
+    marginVertical: 8,
+  },
+  categoryIconTitle: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  numberOfItemsWrapper: {},
+  itemTitle: {
+    color: '#fff',
+    marginLeft: 10,
+    fontFamily: 'Poppins-Regular',
+    fontSize: 15,
+    textAlignVertical: 'center',
+    marginTop: 4,
+  },
+  numberOfItemsText: {
+    color: '#c2c2c2',
+    fontFamily: 'Poppins-Light',
+    fontSize: 10,
+    marginTop: 4,
+  },
+  //!Got from pending
+  informationText: {
+    fontFamily: 'Poppins-Regular',
+    fontSize: 16,
+    alignSelf: 'center',
+    textAlign: 'justify',
   },
 });
 

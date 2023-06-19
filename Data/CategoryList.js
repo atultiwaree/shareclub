@@ -1,14 +1,6 @@
 const categoryList = [
   {
     id: 1,
-    title: 'New Arrivals',
-    iconName: 'new-releases',
-    provider: 'MaterialIcons',
-    category: 'NewProducts',
-    numberOfItems: 73,
-  },
-  {
-    id: 2,
     title: 'Rooms | Flat - Rentals',
     iconName: 'house-siding',
     provider: 'MaterialIcons',
@@ -16,7 +8,7 @@ const categoryList = [
     numberOfItems: 699,
   },
   {
-    id: 3,
+    id: 2,
     title: 'Books | Notes',
     iconName: 'book',
     provider: 'MaterialIcons',
@@ -24,7 +16,7 @@ const categoryList = [
     numberOfItems: 100,
   },
   {
-    id: 4,
+    id: 3,
     title: 'Electronic items',
     iconName: 'ios-phone-portrait',
     provider: 'Ionicons',
@@ -33,7 +25,7 @@ const categoryList = [
   },
 
   {
-    id: 5,
+    id: 4,
     title: 'Household items',
     iconName: 'luggage-cart',
     provider: 'FontAwesome5',
@@ -41,7 +33,7 @@ const categoryList = [
     numberOfItems: 509,
   },
   {
-    id: 6,
+    id: 5,
     title: 'Student services',
     iconName: 'hands-helping',
     provider: 'FontAwesome5',
@@ -49,7 +41,7 @@ const categoryList = [
     numberOfItems: 400,
   },
   {
-    id: 7,
+    id: 6,
     title: 'Attire | Wearables',
     iconName: 'shoe-sneaker',
     provider: 'MaterialCommunityIcons',
@@ -57,12 +49,12 @@ const categoryList = [
     numberOfItems: 9,
   },
   {
-    id: 8,
+    id: 7,
     title: 'Craft Supplies and tools',
-    iconName: 'shoe-sneaker',
+    iconName: 'minecraft',
     provider: 'MaterialCommunityIcons',
     category: 'Attires',
-    numberOfItems: 9,
+    numberOfItems: 23,
   },
 ];
 
@@ -301,4 +293,25 @@ const productDetails = [
   },
 ];
 
-export {categoryList, productDetails};
+const accountOptionsList = [
+  {
+    id: 1,
+    title: 'History',
+    provider: 'MaterialIcons',
+    iconName: 'history',
+  },
+  {
+    id: 2,
+    title: 'Pinned items',
+    provider: 'Ionicons',
+    iconName: 'ios-pin-outline',
+  },
+  {
+    id: 3,
+    title: 'Help ? | Contact us',
+    provider: 'AntDesign',
+    iconName: 'customerservice',
+  },
+];
+
+export {categoryList, productDetails, accountOptionsList};

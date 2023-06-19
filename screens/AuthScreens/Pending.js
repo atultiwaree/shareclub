@@ -5,6 +5,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  ActivityIndicator,
   ToastAndroid,
 } from 'react-native';
 import React from 'react';
@@ -13,6 +14,8 @@ import axios from 'axios';
 import {updateUser} from '../../redux/Slices/authSlice';
 
 const Pending = ({navigation}) => {
+  const [loading, setLoading] = React.useState(false);
+
   const dispatch = useDispatch();
   const persistedData = useSelector(state => state.auth.profile);
   console.log(persistedData);
@@ -27,6 +30,8 @@ const Pending = ({navigation}) => {
 
   async function serverStatusCheck() {
     try {
+      setLoading(true);
+
       const {data: userStatusResponse} = await axios.get(
         `http://192.168.42.75:3000/api/v1/user/status/${persistedData.id}`,
         {
@@ -39,11 +44,12 @@ const Pending = ({navigation}) => {
 
       if (userStatusResponse.success === true) {
         if (userStatusResponse.data.active === true) {
-          console.log('fuck you');
           dispatch(
             updateUser({type: 'pending', data: userStatusResponse.data.active}),
           );
+          setLoading(fal);
         } else {
+          setLoading(false);
           showToastWithGravity();
         }
       } else throw Error('Something went wrong');
@@ -66,7 +72,13 @@ const Pending = ({navigation}) => {
           {messageData.PendingMessage}
         </Text>
         <TouchableOpacity onPress={serverStatusCheck}>
-          <Text style={styles.btn}>CHECK MY STATUS</Text>
+          <Text style={styles.btn}>
+            {!loading ? (
+              `CHECK MY STATUS`
+            ) : (
+              <ActivityIndicator size="small" color="#ff6584" />
+            )}
+          </Text>
         </TouchableOpacity>
       </View>
     </View>
