@@ -1,8 +1,10 @@
-import {memo, useMemo, useCallback} from 'react';
 import axios from 'axios';
 import auth from '@react-native-firebase/auth';
 
-import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import {
+  GoogleSignin,
+  statusCodes,
+} from '@react-native-google-signin/google-signin';
 import DeviceInfo from 'react-native-device-info';
 
 GoogleSignin.configure({
@@ -23,7 +25,7 @@ const googleSignIn = async () => {
      * @auth : Refers to firebaseStuff
      * */
 
-    const {idToken} = await GoogleSignin.signIn();
+    const {idToken} = await GoogleSignin.signIn().catch(e => console.log(e));
 
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
 
@@ -36,7 +38,7 @@ const googleSignIn = async () => {
       **/
 
     let {data: serverResponse} = await axios.post(
-      `http://192.168.42.75:3000/api/v1/user/googleauth/${mainINfo.user.uid}`,
+      `https://shareclub.shridaan.com/api/v1/user/googleauth/${mainINfo.user.uid}`,
       {
         deviceModel: DeviceInfo.getModel(),
         deviceId: DeviceInfo.getDeviceId(),
@@ -49,14 +51,12 @@ const googleSignIn = async () => {
       },
     );
 
-    // console.log(
-    //   '🚀 ~ file: Plus.js:95 ~ googleSignIn ~ serverResponse:',
-    //   serverResponse,
-    // );
-
     return serverResponse;
-  } catch (e) {
-    console.log('🚀 ~ file: Plus.js:81 ~ signInErrors ~ e:', e);
+  } catch (error) {
+    if (statusCodes.SIGN_IN_CANCELLED === String(12501)) {
+      return 'cancelled';
+    }
+    console.log('Error at sign in ', error);
   }
 };
 

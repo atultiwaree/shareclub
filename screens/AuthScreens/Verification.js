@@ -7,6 +7,7 @@ import {
   View,
   Alert,
   TextInput,
+  ActivityIndicator,
 } from 'react-native';
 import React, {useState} from 'react';
 import messageConstants from '../../Data/message.data';
@@ -14,7 +15,6 @@ import {boxWithInnerText} from '../../Data/interface.data';
 import {launchImageLibrary} from 'react-native-image-picker';
 import Warning from '../../Data/Warning';
 import axios from 'axios';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useSelector, useDispatch} from 'react-redux';
 import {updateUser} from '../../redux/Slices/authSlice';
 
@@ -22,7 +22,7 @@ const Verification = ({navigation}) => {
   const userPersistedData = useSelector(state => state.auth.profile);
   const dispatcher = useDispatch();
 
-  console.log(userPersistedData);
+  // console.log(userPersistedData);
 
   //!Number and College States
 
@@ -40,6 +40,9 @@ const Verification = ({navigation}) => {
   //!Warning State
   const [showWarning, setShowWarning] = useState(false);
   const [warningMessage, setWarningMessage] = useState('');
+
+  //!Loading
+  const [loading, setLoading] = useState(false);
 
   async function selectImageBoxHandler(boxId) {
     try {
@@ -82,7 +85,6 @@ const Verification = ({navigation}) => {
       setImageArray([]);
       setImageArray([img1, img2, img3]);
       setGoToNext(true);
-      console.log(imageArray);
     } else {
       Alert.alert('Please Select All The Images');
     }
@@ -94,6 +96,7 @@ const Verification = ({navigation}) => {
 
     if (okay) {
       try {
+        setLoading(true);
         const formData = new FormData();
         formData.append('whatsappNumber', whatsappNumber);
         for (const i of imageArray) {
@@ -101,7 +104,7 @@ const Verification = ({navigation}) => {
         }
 
         let {data: verificationResponse} = await axios.post(
-          `http://192.168.42.75:3000/api/v1/user/verify/${userPersistedData.id}`,
+          `https://shareclub.shridaan.com/api/v1/user/verify/${userPersistedData.id}`,
           formData,
           {
             headers: {
@@ -118,9 +121,11 @@ const Verification = ({navigation}) => {
               data: verificationResponse.data.verification,
             }),
           );
+          setLoading(false);
         } else {
           setWarningMessage('Something went wrong');
           setShowWarning(true);
+          setLoading(false);
         }
       } catch (error) {
         console.log('Error SubmitVeriyHandler', error);
@@ -199,17 +204,10 @@ const Verification = ({navigation}) => {
     }
   }
 
-  const fuck = async () => {
-    console.log('Fuck Error');
-  };
-
   return (
     <View style={styles.wrapper}>
       {!goToNext ? (
         <View style={styles.boxContainer}>
-          <Text style={styles.disclamer}>
-            {messageConstants.VerificationDisclamer}
-          </Text>
           <FlatList
             data={boxWithInnerText}
             renderItem={props => <Boxes {...props} />}
@@ -217,6 +215,9 @@ const Verification = ({navigation}) => {
           <TouchableOpacity onPress={nextButtonHandler}>
             <Text style={styles.btn}>NEXT</Text>
           </TouchableOpacity>
+          <Text style={styles.disclamer}>
+            {messageConstants.VerificationDisclamer}
+          </Text>
         </View>
       ) : (
         <View>
@@ -227,6 +228,7 @@ const Verification = ({navigation}) => {
             keyboardType="number-pad"
             onChangeText={e => setWhatsappNumber(e)}
             value={whatsappNumber}
+            editable={loading ? false : true}
           />
           <TextInput
             maxLength={10}
@@ -235,12 +237,18 @@ const Verification = ({navigation}) => {
             keyboardType="number-pad"
             onChangeText={e => reSetWhatsappNumber(e)}
             value={rewhatsappNumber}
+            editable={loading ? false : true}
           />
-          <TouchableOpacity onPress={submitVerifyHandler}>
-            <Text style={styles.btn}>SUBMIT & VERIFY</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={fuck}>
-            <Text style={styles.btn}>SU VERIFY</Text>
+          <TouchableOpacity
+            disabled={loading ? true : false}
+            onPress={submitVerifyHandler}>
+            <Text style={styles.btn}>
+              {!loading ? (
+                `SEND FOR VERIFICAITON`
+              ) : (
+                <ActivityIndicator size="small" color="#ff6584" />
+              )}
+            </Text>
           </TouchableOpacity>
           {showWarning ? <Warning message={warningMessage} /> : null}
         </View>
@@ -263,8 +271,10 @@ const styles = StyleSheet.create({
   box: {
     height: 140,
     width: '100%',
-    borderWidth: 2,
-    borderStyle: 'dashed',
+    borderWidth: 1,
+    // borderStyle: 'dashed',
+    borderRadius: 15,
+    backgroundColor: 'white',
     borderColor: '#353535',
     marginVertical: 10,
     justifyContent: 'center',
@@ -287,11 +297,14 @@ const styles = StyleSheet.create({
     color: '#353535',
     fontWeight: 600,
     fontSize: 15,
+    fontFamily: 'Poppins-Regular',
   },
   disclamer: {
-    color: 'red',
-    fontSize: 13,
+    color: '#353535',
+    fontSize: 10,
     fontWeight: 'bold',
+    alignSelf: 'center',
+    marginVertical: 10,
   },
   inputText: {
     fontSize: 16,

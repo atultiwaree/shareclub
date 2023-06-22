@@ -27,7 +27,10 @@ const SignIn = () => {
 
       let ServerResponse = await authSystem.googleSignIn();
 
-      if (ServerResponse.success === true) {
+      if (ServerResponse === 'cancelled') {
+        console.log('User cancelled signIn');
+        setLoading(false);
+      } else if (ServerResponse?.success === true) {
         console.log('🚀 ~ User logged in.');
         dispatch(addUser(ServerResponse.data));
         setLoading(false);
@@ -47,6 +50,7 @@ const SignIn = () => {
           />
         </View>
         <Pressable
+          disabled={loading ? true : false}
           android_ripple={{color: 'white'}}
           style={[
             !loading
@@ -77,7 +81,11 @@ const SignIn = () => {
               </View>
             </>
           ) : (
-            <ActivityIndicator size="small" color="#ff6584" />
+            <ActivityIndicator
+              size="small"
+              color="#ff6584"
+              style={{height: 28}}
+            />
           )}
         </Pressable>
         <Text style={[styles.informationText, {fontSize: 10, fontWeight: 900}]}>
@@ -133,6 +141,7 @@ const styles = StyleSheet.create({
     fontSize: 10,
     marginTop: 4,
   },
+
   //!Got from pending
   informationText: {
     fontFamily: 'Poppins-Regular',

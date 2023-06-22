@@ -14,7 +14,7 @@ const Profile = () => {
   const persistedUser = useSelector(state => state.auth.profile);
 
   const [userName, setuserName] = useState('Guest user');
-  const [userImage, setuserImage] = useState(null);
+  const [userImage, setuserImage] = useState(undefined);
 
   useEffect(() => {
     console.log('Google subscribed user.');
@@ -36,7 +36,7 @@ const Profile = () => {
 
       //Reset username and image
 
-      setuserImage(null);
+      setuserImage(undefined);
       setuserName('Guest user');
       console.log('User logged out');
     } catch (e) {
@@ -81,7 +81,7 @@ const Profile = () => {
           <Image
             resizeMode="contain"
             source={
-              userImage === null
+              userImage === undefined
                 ? require('../assets/images/guestProfilef.png')
                 : {uri: userImage}
             }
@@ -145,8 +145,8 @@ const styles = StyleSheet.create({
     borderRadius: 15,
   },
   dpContainer: {
-    height: 140,
-    width: 140,
+    height: 120,
+    width: 120,
     borderRadius: 100,
     overflow: 'hidden',
     // borderWidth: 1,

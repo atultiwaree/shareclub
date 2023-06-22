@@ -13,12 +13,11 @@ import messageData from '../../Data/message.data';
 import axios from 'axios';
 import {updateUser} from '../../redux/Slices/authSlice';
 
-const Pending = ({navigation}) => {
+const Pending = () => {
   const [loading, setLoading] = React.useState(false);
 
   const dispatch = useDispatch();
   const persistedData = useSelector(state => state.auth.profile);
-  console.log(persistedData);
 
   const showToastWithGravity = () => {
     ToastAndroid.showWithGravity(
@@ -33,7 +32,7 @@ const Pending = ({navigation}) => {
       setLoading(true);
 
       const {data: userStatusResponse} = await axios.get(
-        `http://192.168.42.75:3000/api/v1/user/status/${persistedData.id}`,
+        `https://shareclub.shridaan.com/api/v1/user/status/${persistedData.id}`,
         {
           headers: {
             'Content-Type': 'application/json',
