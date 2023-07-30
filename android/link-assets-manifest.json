@@ -1,0 +1,57 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/Nunito-Bold.ttf",
+      "sha1": "7221ce766960c57f76b37028c1a64352dfcc8e32"
+    },
+    {
+      "path": "assets/fonts/Nunito-Light.ttf",
+      "sha1": "8b282bf12762114ea8ea6b25e4fc078ee343ed71"
+    },
+    {
+      "path": "assets/fonts/Nunito-Regular.ttf",
+      "sha1": "8fdd0772656d207b51cca97517a9de985f7053a2"
+    },
+    {
+      "path": "assets/fonts/Overlock-Black.ttf",
+      "sha1": "89e5fa11519843bd59aa37a0013e47a42c4f4ea2"
+    },
+    {
+      "path": "assets/fonts/Overlock-Bold.ttf",
+      "sha1": "21a0df3e748aa3ed007bc5f9c29802efecd7e13c"
+    },
+    {
+      "path": "assets/fonts/Overlock-Regular.ttf",
+      "sha1": "4bd2f4261a8a8f4df1a4f28f5681c839f44ddd2c"
+    },
+    {
+      "path": "assets/fonts/Poppins-Black.otf",
+      "sha1": "655fab6b19943846e5f0ffcd16db0db9c3f71388"
+    },
+    {
+      "path": "assets/fonts/Poppins-Bold.otf",
+      "sha1": "fc40855366c1f38478de1473bf483a4ad5d515ac"
+    },
+    {
+      "path": "assets/fonts/Poppins-Light.otf",
+      "sha1": "37c17e7bee737afaa91b0880df6cbd1f43f1a270"
+    },
+    {
+      "path": "assets/fonts/Poppins-Medium.otf",
+      "sha1": "e566106c0be5bca5cb3dd0223953310774f7ca59"
+    },
+    {
+      "path": "assets/fonts/Poppins-Regular.otf",
+      "sha1": "e6fe7a5a39e5e9eabeceb3c853117827367d5c91"
+    },
+    {
+      "path": "assets/fonts/Poppins-SemiBold.otf",
+      "sha1": "8c0d5c6d40881839910161929e727aac847666c6"
+    },
+    {
+      "path": "assets/fonts/Poppins-Thin.otf",
+      "sha1": "f0ddc10ee6c9742e1dba2451fbccb2beaff8ee0f"
+    }
+  ]
+}
