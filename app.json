@@ -1,0 +1,8 @@
+{
+  "name": "testshareclub",
+  "displayName": "testshareclub",
+  "androidStatusBar": {
+    "backgroundColor": "#000000"
+  },
+  "softwareKeyboardLayoutMode": "pan"
+}
