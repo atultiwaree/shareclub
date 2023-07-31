@@ -13,6 +13,11 @@ import DIcon from '../../Data/DIcons';
 import {pricingComma} from '../../utils/helper';
 import {useDispatch} from 'react-redux';
 import {pinUnPinProducts} from '../../redux/Slices/pinSlice';
+import {
+  responsiveFontSize,
+  responsiveHeight,
+  responsiveWidth,
+} from 'react-native-responsive-dimensions';
 
 const PinnedProductCard = props => {
   const dispatch = useDispatch();
@@ -141,20 +146,20 @@ const styles = StyleSheet.create({
   eachProductWrapper: {
     width: '100%',
     backgroundColor: '#e7e7e7',
-    padding: 10,
-    borderRadius: 15,
+    padding: responsiveWidth(2.8),
+    borderRadius: responsiveWidth(5),
     overflow: 'hidden',
-    marginVertical: 25,
+    marginVertical: responsiveHeight(2),
   },
   productImageWrapper: {
-    borderRadius: 15,
+    borderRadius: responsiveWidth(5),
     backgroundColor: '#fff',
     overflow: 'hidden',
   },
   productImageTrackerWrapper: {
     flexDirection: 'row',
     justifyContent: 'center',
-    padding: 10,
+    padding: responsiveWidth(2.5),
     gap: 8,
   },
   productImageTracker: {
@@ -165,7 +170,7 @@ const styles = StyleSheet.create({
     // backgroundColor: '#fe961a',
   },
   imageStyle: {
-    width: 300,
+    width: responsiveWidth(83.3),
     aspectRatio: 1,
     flex: 1,
     // height: undefined,
@@ -178,6 +183,7 @@ const styles = StyleSheet.create({
     width: '100%',
     padding: 10,
     flexDirection: 'row',
+    marginTop: responsiveWidth(2),
   },
   productTitleText: {
     fontWeight: 'bold',
@@ -185,7 +191,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexWrap: 'wrap',
     color: 'black',
-    fontSize: 16,
+    fontSize: responsiveFontSize(2.1),
   },
   productDescription: {
     width: '100%',
@@ -193,7 +199,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   productDescriptionText: {
-    fontSize: 12,
+    fontSize: responsiveFontSize(1.7),
   },
   pricingContactWrapper: {
     padding: 15,
@@ -225,13 +231,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
-
     marginBottom: 5,
   },
   RemoveText: {
     color: '#353535',
     fontFamily: 'Poppins-Regular',
     fontWeight: '800',
-    marginLeft: 10,
+    marginLeft: 4,
+    fontSize: responsiveFontSize(1.8),
   },
 });

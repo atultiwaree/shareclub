@@ -11,7 +11,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {productType} from '../../Data/CategoryList';
 import DIcon from '../../Data/DIcons';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
@@ -137,7 +137,7 @@ const BooksNotes = ({route, navigation}) => {
     try {
       const imageDetails = await launchImageLibrary({
         mediaType: 'photo',
-        quality: 0.5,
+        quality: 0.4,
       });
       tempObj['uri'] = imageDetails.assets[0].uri;
       tempObj['name'] = imageDetails.assets[0].fileName;

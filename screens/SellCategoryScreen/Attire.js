@@ -137,7 +137,7 @@ const Attire = ({route, navigation}) => {
     try {
       const imageDetails = await launchImageLibrary({
         mediaType: 'photo',
-        quality: 0.5,
+        quality: 0.4,
       });
       tempObj['uri'] = imageDetails.assets[0].uri;
       tempObj['name'] = imageDetails.assets[0].fileName;

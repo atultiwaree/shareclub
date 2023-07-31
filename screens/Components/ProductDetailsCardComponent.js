@@ -14,6 +14,11 @@ import DIcon from '../../Data/DIcons';
 import {customAndroidToast, pricingComma} from '../../utils/helper';
 import ViewShot from 'react-native-view-shot';
 import share from 'react-native-share';
+import {
+  responsiveFontSize,
+  responsiveHeight,
+  responsiveWidth,
+} from 'react-native-responsive-dimensions';
 
 const ProductDetailsCardComponent = props => {
   const ref = React.useRef();
@@ -52,8 +57,8 @@ const ProductDetailsCardComponent = props => {
     try {
       Vibration.vibrate(50);
       let message =
-        "Hi! Visitor, from ShareClub, lets have a discussion on product you've listed " +
-        `" ${productTitle}"`;
+        "Hi! there visitor, from *ShareClub*, I want to know more about the product you've listed" +
+        `*${productTitle} 🙂*`;
       let url =
         'whatsapp://send?text=' + message + '&phone=91' + user.whatsappNumber;
       await Linking.openURL(url);
@@ -76,7 +81,7 @@ const ProductDetailsCardComponent = props => {
           share.open({
             url: uri,
             message:
-              'Download shareclub, to get this product https://play.google.com/store/apps/details?id=com.testshareclub',
+              'Download *ShareClub*, to reach out this product *https://play.google.com/store/apps/details?id=com.testshareclub*',
           });
       });
     } catch (e) {
@@ -194,23 +199,21 @@ const styles = StyleSheet.create({
   eachProductWrapper: {
     width: '100%',
     backgroundColor: '#e7e7e7',
-    padding: 10,
-    borderRadius: 15,
+    padding: responsiveWidth(2.8),
+    borderRadius: responsiveWidth(5),
     overflow: 'hidden',
-    marginVertical: 5,
+    marginVertical: responsiveHeight(0.8),
   },
+
   productImageWrapper: {
-    // padding: 2,
-    // borderWidth: 1,
-    // borderColor: 'red',
-    borderRadius: 15,
+    borderRadius: responsiveWidth(5),
     backgroundColor: '#fff',
     overflow: 'hidden',
   },
   productImageTrackerWrapper: {
     flexDirection: 'row',
     justifyContent: 'center',
-    padding: 10,
+    padding: responsiveWidth(2.1),
     gap: 8,
   },
   productImageTracker: {
@@ -218,31 +221,27 @@ const styles = StyleSheet.create({
     height: 5,
     borderRadius: 50,
     backgroundColor: '#333',
-
-    // backgroundColor: '#fe961a',
   },
   imageStyle: {
-    width: 300,
+    width: responsiveWidth(83.3),
     aspectRatio: 1,
     flex: 1,
-    // height: undefined,
   },
-  productAbout: {
-    // borderColor: 'blue',
-    // borderWidth: 1,
-  },
+
   productTitle: {
     width: '100%',
     padding: 10,
     flexDirection: 'row',
+    marginTop: responsiveWidth(2),
   },
+
   productTitleText: {
     fontWeight: '700',
     fontFamily: 'Poppins-Regular',
     flex: 1,
     flexWrap: 'wrap',
     color: 'black',
-    fontSize: 15,
+    fontSize: responsiveFontSize(2.1),
   },
   productDescription: {
     width: '100%',
@@ -250,7 +249,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   productDescriptionText: {
-    fontSize: 12,
+    fontSize: responsiveFontSize(1.7),
   },
   pricingContactWrapper: {
     padding: 15,
@@ -314,6 +313,6 @@ const styles = StyleSheet.create({
     color: '#353535',
     fontFamily: 'Poppins-Regular',
     fontWeight: '600',
-    fontSize: 12,
+    fontSize: responsiveFontSize(1.5),
   },
 });

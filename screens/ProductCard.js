@@ -64,8 +64,8 @@ const ProductCard = props => {
     Vibration.vibrate(40);
     try {
       let message =
-        "Hi! Visitor, from ShareClub, lets have a discussion on product you've listed " +
-        `" ${productTitle}"`;
+        "Hi! there visitor, from *ShareClub*, I want to know more about the product you've listed" +
+        `*${productTitle} 🙂*`;
       let url =
         'whatsapp://send?text=' + message + '&phone=91' + user.whatsappNumber;
       await Linking.openURL(url);
@@ -91,7 +91,7 @@ const ProductCard = props => {
         share.open({
           url: uri,
           message:
-            'Download shareclub, to get this product https://play.google.com/store/apps/details?id=com.testshareclub',
+            'Download *ShareClub*, to reach out this product *https://play.google.com/store/apps/details?id=com.testshareclub*',
         });
     });
   }
@@ -246,22 +246,19 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: '#e7e7e7',
     padding: responsiveWidth(2.8),
-    borderRadius: 15,
+    borderRadius: responsiveWidth(5),
     overflow: 'hidden',
     marginVertical: responsiveHeight(2),
   },
   productImageWrapper: {
-    // padding: 2,
-    // borderWidth: 1,
-    // borderColor: 'red',
-    borderRadius: responsiveWidth(3),
+    borderRadius: responsiveWidth(5),
     backgroundColor: '#fff',
     overflow: 'hidden',
   },
   productImageTrackerWrapper: {
     flexDirection: 'row',
     justifyContent: 'center',
-    padding: 10,
+    padding: responsiveWidth(2),
     gap: 8,
   },
   productImageTracker: {
@@ -269,22 +266,18 @@ const styles = StyleSheet.create({
     height: 5,
     borderRadius: 50,
     backgroundColor: '#333',
-
-    // backgroundColor: '#fe961a',
   },
   imageStyle: {
     width: '100%',
     aspectRatio: 1,
     flex: 1,
   },
-  productAbout: {
-    // borderColor: 'blue',
-    // borderWidth: 1,
-  },
+
   productTitle: {
     width: '100%',
     padding: 10,
     flexDirection: 'row',
+    marginTop: responsiveWidth(2),
   },
   productTitleText: {
     fontWeight: '700',

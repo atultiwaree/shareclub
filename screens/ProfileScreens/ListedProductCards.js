@@ -14,6 +14,11 @@ import {pricingComma} from '../../utils/helper';
 import {useSelector} from 'react-redux';
 import {useDelistProductMutation} from '../../redux/Slices/rtkQuerySlices/listedProductsRtkSlice';
 import {customAndroidToast} from '../../utils/helper';
+import {
+  responsiveFontSize,
+  responsiveHeight,
+  responsiveWidth,
+} from 'react-native-responsive-dimensions';
 function renderProductImage(url) {
   return (
     <Image style={styles.imageStyle} resizeMode="contain" source={{uri: url}} />
@@ -159,24 +164,21 @@ export default ListedProductCards;
 const styles = StyleSheet.create({
   eachProductWrapper: {
     width: '100%',
-    backgroundColor: '#e7e7e7',
-    padding: 10,
-    borderRadius: 15,
+    backgroundColor: '#fff',
+    padding: responsiveWidth(2.8),
+    borderRadius: responsiveWidth(5),
     overflow: 'hidden',
-    marginVertical: 25,
+    marginVertical: responsiveHeight(1.5),
   },
   productImageWrapper: {
-    // padding: 2,
-    // borderWidth: 1,
-    // borderColor: 'red',
-    borderRadius: 15,
+    borderRadius: responsiveWidth(5),
     backgroundColor: '#fff',
     overflow: 'hidden',
   },
   productImageTrackerWrapper: {
     flexDirection: 'row',
     justifyContent: 'center',
-    padding: 10,
+    padding: responsiveWidth(2.1),
     gap: 8,
   },
   productImageTracker: {
@@ -187,7 +189,7 @@ const styles = StyleSheet.create({
     // backgroundColor: '#fe961a',
   },
   imageStyle: {
-    width: 300,
+    width: responsiveWidth(83.4),
     aspectRatio: 1,
     flex: 1,
     // height: undefined,
@@ -200,6 +202,7 @@ const styles = StyleSheet.create({
     width: '100%',
     padding: 10,
     flexDirection: 'row',
+    marginTop: responsiveWidth(2),
   },
   productTitleText: {
     fontWeight: 'bold',
@@ -207,7 +210,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexWrap: 'wrap',
     color: 'black',
-    fontSize: 16,
+    fontSize: responsiveFontSize(2.1),
   },
   productDescription: {
     width: '100%',
@@ -215,7 +218,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   productDescriptionText: {
-    fontSize: 12,
+    fontSize: responsiveFontSize(1.7),
   },
   pricingContactWrapper: {
     padding: 15,
@@ -247,15 +250,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    // borderWidth: 1,
-    // borderColor: 'red',
     marginBottom: 5,
   },
   activeStatusText: {
     color: '#353535',
     fontFamily: 'Poppins-Regular',
     fontWeight: '800',
-    marginLeft: 10,
-    // textAlignVertical: 'center',
+    marginLeft: 5,
+    fontSize: responsiveFontSize(1.8),
   },
 });
