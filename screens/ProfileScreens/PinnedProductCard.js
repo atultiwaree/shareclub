@@ -167,17 +167,11 @@ const styles = StyleSheet.create({
     height: 5,
     borderRadius: 50,
     backgroundColor: '#333',
-    // backgroundColor: '#fe961a',
   },
   imageStyle: {
-    width: responsiveWidth(83.3),
+    width: responsiveWidth(84.3),
     aspectRatio: 1,
     flex: 1,
-    // height: undefined,
-  },
-  productAbout: {
-    // borderColor: 'blue',
-    // borderWidth: 1,
   },
   productTitle: {
     width: '100%',

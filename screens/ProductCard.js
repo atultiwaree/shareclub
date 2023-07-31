@@ -268,7 +268,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#333',
   },
   imageStyle: {
-    width: '100%',
+    width: responsiveWidth(83.3),
     aspectRatio: 1,
     flex: 1,
   },

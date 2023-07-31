@@ -47,7 +47,10 @@ const Verification = ({navigation}) => {
 
   async function selectImageBoxHandler(boxId) {
     try {
-      const imageDetails = await launchCamera({mediaType: 'photo'});
+      const imageDetails = await launchCamera({
+        mediaType: 'photo',
+        quality: 0.4,
+      });
 
       let tempObj = Object.assign({});
 
